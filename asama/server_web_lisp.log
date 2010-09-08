@@ -1,0 +1,11 @@
+[2010-09-02 19:55:30 [INFO]] No session for session identifier '1:94E0F2CD7DD5331B0251455C1BA7069A' (User-Agent: 'Mozilla/5.0 (X11; U; Linux x86_64; ja; rv:1.9.2.8) Gecko/20100723 Ubuntu/10.04 (lucid) Firefox/3.6.8', IP: '127.0.0.1')
+[2010-09-02 19:55:30 [WARNING]] Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-02 19:55:30 [WARNING]] Warning while processing connection: Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-02 19:55:50 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003685051}>.
+[2010-09-02 20:00:01 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10044C0831}>.
+[2010-09-08 17:24:48 [INFO]] No session for session identifier '1:E64275F49286DC4753D369DCA4A889C5' (User-Agent: 'Mozilla/5.0 (X11; U; Linux x86_64; ja; rv:1.9.2.8) Gecko/20100723 Ubuntu/10.04 (lucid) Firefox/3.6.8', IP: '127.0.0.1')
+[2010-09-08 17:24:48 [WARNING]] Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-08 17:24:48 [WARNING]] Warning while processing connection: Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-08 17:25:08 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10036EAE51}>.
+[2010-09-08 17:25:33 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10035789D1}>.
+[2010-09-08 17:25:58 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004421BF1}>.

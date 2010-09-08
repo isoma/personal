@@ -1,0 +1,35 @@
+(defpackage "ASAMA_UI"
+  (:use xlib common-lisp))
+
+(in-package "ASAMA_UI")
+
+(defun just-say-lisp (host &optional (font-name "fg-16"))
+  (let* ((display   (OPEN-DISPLAY host))
+         (screen    (first (DISPLAY-ROOTS display)))
+         (fg-color  (SCREEN-BLACK-PIXEL screen))
+         (bg-color  (SCREEN-WHITE-PIXEL screen))
+         (nice-font (OPEN-FONT display font-name))
+         
+         ;; Create a menu as a child of the root window.
+         (a-menu       (create-menu (SCREEN-ROOT screen)
+                                    fg-color bg-color nice-font)))
+
+    (setf (menu-title a-menu) "Please pick your favorite language:")
+    (menu-set-item-list a-menu "Fortran" "APL" "Forth" "Lisp")
+
+    ;; Bedevil the user until he picks a nice programming language
+    (unwind-protect
+        (loop
+          ;; Determine the current root window position of the pointer
+          (multiple-value-bind (x y) (QUERY-POINTER (SCREEN-ROOT screen))
+
+            (let ((choice (menu-choose a-menu x y)))
+              (when (string-equal "Lisp" choice)
+                (return)))))
+
+      (CLOSE-DISPLAY display))))
+
+(just-say-lisp "deneb")
+
+
+（OPEN-DISPLAY 
