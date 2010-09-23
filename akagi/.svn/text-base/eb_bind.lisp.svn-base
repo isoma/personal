@@ -1,0 +1,93 @@
+(defpackage :lib-eb
+   (:use :common-lisp :cffi))
+
+(in-package :lib-eb)
+
+(progn
+   (if (and (foreign-symbol-pointer "eb_initialize_library")
+          (nth-value 1 (intern "*libeb*")))
+      (close-foreign-library *libeb*))
+   (define-foreign-library libeb
+      (:unix (:or "libeb.so" "libeb.so.13.1.0"))
+      (t (:default "libeb")))
+   (load "/home/soma/trunk/eb/eb.lisp")
+   (defvar *libeb*)
+   (setf *libeb* (use-foreign-library libeb)))
+
+(let ((return-code (eb_initialize_library)))
+  (if (/= return-code EB_SUCCESS)
+      (error "eb_initialize_library() failed.(code = ~d)" return-code)
+       return-code))
+
+;; (eb_finalize_library)
+
+
+;;(foreign-type-size 'EB_Book_Struct)
+
+;; (defun check-book-type(path)
+;;   (with-foreign-object (book 'EB_Book_Struct)
+
+;;     (print book)
+;;     (eb_initialize_book (make-pointer book))))
+
+;;     (with-foreign-pointer
+;;         (eb_initialize_book (make-pointer book)))))
+;;     (with-foreign-string (book-path  path)
+;;       (let((return-code  (eb_bind book book-path)))
+;;         (if (/= return-code EB_SUCCESS)
+;;             (error ()(error "Failed to bind the book, ~S: ~S~%" 
+;;                             (foreign-string-to-lisp
+;;                              (eb_error_message return-code)) path))
+;;             return-code)
+;; (format "~a" book       )
+;;         ))))
+
+;; (foreign-alloc :char)
+;; (foreign-alloc 'EB_Book_Struct)
+;;  (eb_initialize_book (foreign-alloc 'EB_Book_Struct))
+
+;;(check-book-type "/media/old system/dic/CRCEN")
+
+
+(with-foreign-pointer (book (foreign-type-size 'EB_Book_Struct)) 
+  (with-foreign-object (code :int)
+    (let ((path "/home/soma/dic/EDICT")) ; ((path "/home/soma/dic/CRCEN"))
+      (with-foreign-string (book-path path)
+        (let ((return-code))
+          (if (/= (setf return-code (eb_bind book book-path)) EB_SUCCESS) ; Bind Eb_Book object to boook
+              (error "Failed to bind the book, ~S: ~S~%" 
+                     (foreign-string-to-lisp (eb_error_message return-code)) path))
+          (if (/= EB_SUCCESS (setf return-code (eb_disc_type book code))) ; get dictonaly type 
+              (error "Failed to bind the book, ~S: ~S~%" 
+                     (foreign-string-to-lisp (eb_error_message return-code)) path)
+              (case (mem-ref code :int)
+                (#.EB_DISC_EB (format t "~s is DISC_EB." path ))
+                (#.EB_DISC_EPWING (format t "~s is DISC EPWING.~%" path))
+                (#.EB_DISC_INVALID (format t "~s is invalided.~%" path))
+                (t nil)))
+          (with-foreign-objects ((sub_count :int)
+                                 (sub_codes :int  EB_MAX_SUBBOOKS))
+            (if (and (/= EB_SUCCESS (setf return-code (eb_subbook_list book sub_codes sub_count)))
+                     (/= EB_SUCCESS (setf return-code (eb_set_subbook book sub_codes))))
+                (error "Failed to bind the book, ~S: ~S~%" 
+                       (foreign-string-to-lisp (eb_error_message return-code)) path))))))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(with-foreign-string (book-path  "/home/soma/dic/CRCEN")
+  (format t "~S is DISC_EB.~%" book-path))
+
+(with-foreign-objects ((book 'EB_Book_Struct))
+  (print (foreign-type-size book)))

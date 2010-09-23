@@ -1,0 +1,10 @@
+[2010-08-01 14:12:45 [WARNING]] Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-08-01 14:12:45 [WARNING]] Warning while processing connection: Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-08-01 14:12:46 [INFO]] Default handler called for script /favicon.ico
+[2010-08-01 14:12:46 [INFO]] Default handler called for script /favicon.ico
+[2010-08-01 14:12:49 [INFO]] Default handler called for script /favicon.ico
+[2010-08-01 14:13:06 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004315EE1}>.
+[2010-08-01 14:13:09 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003EA8EF1}>.
+[2010-08-01 14:18:20 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003EF84E1}>.
+[2010-08-02 01:12:03 [INFO]] Default handler called for script /favicon.ico
+[2010-08-02 01:12:23 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10043A9251}>.

@@ -1,0 +1,13 @@
+%module eb
+%{
+
+#include <string>
+
+%}
+
+%include appendx.h
+lisp, binary.lisp, booklist.lisp, defs.lisp, eb.lisp, err.lisp,
+font.lisp, sysdef.lisp, text.lisp, zio.lisp
+
+
+

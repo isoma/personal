@@ -1,0 +1,42 @@
+(defpackage :lib-eb
+   (:use :common-lisp :cffi))
+
+(in-package :lib-eb)
+
+(progn
+   (if (and (foreign-symbol-pointer "(eb_initialize_library")
+          (nth-value 1 (intern "*libeb*")))
+      (close-foreign-library *libeb*))
+   (define-foreign-library libeb
+      (:unix (:or "libeb.so" "libeb.so.13.1.0"))
+      (t (:default "libeb")))
+   (defvar *libeb*)
+   (setf *libeb* (use-foreign-library libeb)))
+
+
+(if (string/=  EB_VERSION_STRING "4.4.1")
+    (load "/home/soma/trunk/eb/eb.lisp"))
+
+(let ((return-code (eb_initialize_library)))
+  (if (/= return-code EB_SUCCESS)
+      (error () (error "eb_initialize_library() failed.(code = ~d)" return-code))
+       return-code))
+
+;; (eb_finalize_library)
+
+
+;;(foreign-type-size 'EB_Book_Struct)
+
+(defun check-book-type(path)
+  (with-foreign-object (book 'EB_Book_Struct)
+    (eb_initialize_book book)
+    (with-foreign-string (book-path  path)
+      (let((return-code  (eb_bind book book-path)))
+        (if (/= return-code EB_SUCCESS)
+            (error () (error "Failed to bind the book, ~S: ~S~%" 
+                             (foreign-string-to-lisp (eb_error_message return-code)) path))
+            return-code)))))
+
+
+
+;;(check-book-type "/media/old system/dic/CRCEN")
