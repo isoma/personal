@@ -71,6 +71,10 @@
        ,(if id `((@ ,label set-attribute) :ID ,id))
        ,(if class `((@ ,label set-attribute) :CLASS ,class)))))
 
+(defpsmacro add-style-attribute (id atribute value)
+  `((@ ((@ document get-element-by-ID) ,id) set-attribute) ,atribute ,value))
+
+
 (defpsmacro create-style-node-o (style-node)
   `(progn
      (setf ,style-node ((@ document create-element) "style"))
@@ -117,7 +121,19 @@
       (defun set-listener ()
         (setf (@ document title) "intialize"))
 
-
+       (defun draw()
+         (let ((canvas ((@ document get-element-by-id) "canvassample"))) ; canvas要素のノードオブジェクト
+           (if (or (! canvas) (! (@ canvas get-context))) ; canvas要素の存在チェックとCanvas未対応ブラウザの対処
+               (return false)
+               (let ((ctx ((@ canvas get-context) "2d")))  ; 2Dコンテキスト 
+                 ((@ ctx begin-path))   ; 四角を描く
+                 ((@ ctx move-to) 20 20)
+                 ((@ ctx line-to) 120 20)
+                 ((@ ctx line-to) 120 120)
+                 ((@ ctx line-to) 20 120)
+                 ((@ ctx close-path))
+                 ((@ ctx stroke))))))
+       
 
 ;;  style-nodeはHTMLに一つだけ、引数で渡すのでなく隠蔽できるはず。
 ;;  classのセレクタの場合cssを作成する。
@@ -156,7 +172,27 @@
 
                         (add-tag-element "body" "p" "p2")
                         (add-text-node "#p2" "text nodeって何だ?")
-                        
+
+
+                        ;;HTML5対応でないbrowserの処理が必要
+
+                        (add-tag-element "body" "canvas" "canvassample")
+                        (add-style-attribute "canvassample" "width" "140")
+                        (add-style-attribute "canvassample" "height" "140")
+                        (add-style-attribute "canvassample" "bgcolor" "#ffffffff")
+                        (add-css style-node "#canvassample" "background-color:#ffffffff")
+                        (add-css style-node "#canvassample" "width:500px")
+                        (draw)
+
+
+                        (add-tag-element "body" "textarea" "in-text1")
+                        (add-css style-node "#in-text1" "background-color:#F22333")
+                        (add-css style-node "#in-text1" "border-width:10px")
+                        (add-css style-node "#in-text1" "width:500px")
+
+                        (add-style-attribute "in-text1" "cols" "120")
+                        (add-style-attribute "in-text1" "rows" "12")
+
                         (each-tag-elements "p" append-child (@ document create-text-node) " opqrstu ")
                         
                         (let ((elements ((@ document get-elements-by-tag-name) "p"))

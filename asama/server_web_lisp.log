@@ -9,3 +9,174 @@
 [2010-09-08 17:25:08 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10036EAE51}>.
 [2010-09-08 17:25:33 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10035789D1}>.
 [2010-09-08 17:25:58 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004421BF1}>.
+[2010-09-10 21:10:26 [INFO]] No session for session identifier '3:EDCDACEB5A93C6989C2B95C38C7C6A15' (User-Agent: 'Mozilla/5.0 (X11; U; Linux x86_64; ja; rv:1.9.2.9) Gecko/20100825 Ubuntu/10.04 (lucid) Firefox/3.6.9', IP: '127.0.0.1')
+[2010-09-10 21:10:26 [WARNING]] Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-10 21:10:26 [WARNING]] Warning while processing connection: Session secret is unbound.  Using Lisp's RANDOM function to initialize it.
+[2010-09-10 21:10:26 [ERROR]] Execution of a form compiled with errors.
+Form:
+  (PS
+ (DEFMACRO ADD-TEXT-NODE5 (BASE TEXT)
+   `(@
+     ((@ (AREF ((@ DOCUMENT GET-ELEMENTS-BY-TAG-NAME) ,BASE) 0) APPEND-CHILD)
+      ((@ DOCUMENT CREATE-TEXT-NODE) ,TEXT))))
+ (DEFMACRO CREATE-STYLE-NODE (STYLE-NODE)
+   `(LISP
+     (LIST (IF (STRING= CLIENT IE) 'CREATE-STYLE-NODE-IE 'CREATE-STYLE-NODE-O)
+           ',STYLE-NODE)))
+ (DEFMACRO ADD-CSS (STYLE-NODE SELECTOR STYLE)
+   `(LISP
+     (LIST (IF (STRING= CLIENT IE) 'ADD-CSS-ELEMENT-IE 'ADD-CSS-ELEMENT-O)
+           ',STYLE-NODE ,SELECTOR ,STYLE)))
+ (DEFUN GREETING-CALLBACK () (ALERT hello world))
+ (DEFUN SET-LISTENER () (SETF (@ DOCUMENT TITLE) intialize))
+ (DEFUN DRAW ()
+   (LET ((CANVAS (@ DOCUMENT GETELEMENTBYID) canvassample))
+     (IF (!! ! CANVAS ! (@ CANVAS GETCONTEXT)) 　 (RETURN FALSE)
+         (LET ((CTX ((@ CANVAS GETCONTEXT) 2d)))
+           ((@ CTX BEGINPATH))
+           ((@ CTX MOVETO) (20 20))
+           ((@ CTX LINETO) (120 20))
+           ((@ CTX LINETO) (120 120))
+           ((@ CTX LINETO) (20 120))
+           ((@ CTX CLOSEPATH))
+           ((@ CTX STROKE))))))
+ (DEFUN HTTP-REQUEST ()
+   (LET ((HTTP-OBJ (NEW (-X-M-L-HTTP-REQUEST))) (STYLE-NODE NIL))
+     ((@ HTTP-OBJ OPEN) POST command T)
+     (SETF (@ HTTP-OBJ ONREADYSTATECHANGE)
+             (LAMBDA ()
+               (IF
+                (&& (== (@ HTTP-OBJ READY-STATE) 4)
+                 (== (@ HTTP-OBJ STATUS) 200))
+                (PROGN
+                 (CREATE-STYLE-NODE STYLE-NODE)
+                 (ADD-CSS STYLE-NODE html body background:gray)
+                 (ADD-CSS STYLE-NODE #p1 color:#cc3333)
+                 (ADD-CSS STYLE-NODE #menu
+                  background:#0099ff; height:20px; width:auto)
+                 (ADD-TEXT-NODE body ABCDEFG)
+                 (ADD-TAG-ELEMENT body div menu 10)
+                 (ADD-TEXT-NODE body (@ HTTP-OBJ RESPONSE-TEXT))
+                 (ADD-TEXT-NODE body text nodeって何だ?)
+                 (ADD-TEXT-NODE #menu (@ HTTP-OBJ RESPONSE-TEXT))
+                 (ADD-TAG-ELEMENT body div 358 10)
+                 (ADD-TAG-ELEMENT body p p1)
+                 (ADD-TEXT-NODE #p1 text nodeって何だ?)
+                 (ADD-TAG-ELEMENT body p p2)
+                 (ADD-TEXT-NODE #p2 text nodeって何だ?)
+                 (ADD-TAG-ELEMENT body canvas canvassample)
+                 (ADD-STYLE-ATTRIBUTE canvassample width 140)
+                 (ADD-STYLE-ATTRIBUTE canvassample height 140)
+                 (DRAW)
+                 (ADD-TAG-ELEMENT body textarea in-text1)
+                 (ADD-CSS STYLE-NODE #in-text1 background-color:#F22333)
+                 (ADD-CSS STYLE-NODE #in-text1 border-width:10px)
+                 (ADD-CSS STYLE-NODE #in-text1 width:500px)
+                 (ADD-STYLE-ATTRIBUTE in-text1 cols 120)
+                 (ADD-STYLE-ATTRIBUTE in-text1 rows 12)
+                 (EACH-TAG-ELEMENTS p APPEND-CHILD
+                  (@ DOCUMENT CREATE-TEXT-NODE)  opqrstu )
+                 (LET ((ELEMENTS ((@ DOCUMENT GET-ELEMENTS-BY-TAG-NAME) p))
+                       (TEXT-ELEMENT
+                        ((@ DOCUMENT CREATE-TEXT-NODE)  123456789 )))
+                   (DO* ((I (- (@ ELEMENTS LENGTH) 1) (DECF I)))
+                        ((< I 0))
+                     ((@ (AREF ELEMENTS I) APPEND-CHILD) TEXT-ELEMENT)))))))
+     ((@ HTTP-OBJ SEND) name = 12324)))
+ (DEFUN START-D-O-M-HANDLING () (SET-LISTENER) (HTTP-REQUEST)))
+Compile-time error:
+  (in macroexpansion of (PS (DEFMACRO ADD-TEXT-NODE5 (BASE TEXT) ...) (DEFMACRO CREATE-STYLE-NODE (STYLE-NODE) ...) ...))
+(hint: For more precise location, try *BREAK-ON-SIGNALS*.)
+Attempting to use Parenscript special form ! as variable
+0: (SB-DEBUG::MAP-BACKTRACE #<CLOSURE (LAMBDA #) {100435EA49}>)[:EXTERNAL]
+1: (BACKTRACE 1152921504606846975 #<SB-IMPL::STRING-OUTPUT-STREAM {100435E981}>)
+2: (TRIVIAL-BACKTRACE:PRINT-BACKTRACE-TO-STREAM
+    #<SB-IMPL::STRING-OUTPUT-STREAM {100435E981}>)
+3: (HUNCHENTOOT::GET-BACKTRACE)
+4: ((FLET #:LAMBDA263) #<SB-INT:COMPILED-PROGRAM-ERROR {1004355801}>)
+5: (SIGNAL #<SB-INT:COMPILED-PROGRAM-ERROR {1004355801}>)[:EXTERNAL]
+6: (ERROR SB-INT:COMPILED-PROGRAM-ERROR)[:EXTERNAL]
+7: (ASAMA_WEB::JAVASCRIPT)
+8: ((SB-PCL::FAST-METHOD HUNCHENTOOT:HANDLE-REQUEST
+     (HUNCHENTOOT:ACCEPTOR HUNCHENTOOT:REQUEST))
+    #<unavailable argument>
+    #<unavailable argument>
+    #<HUNCHENTOOT:ACCEPTOR (host *, port 8888)>
+    #<HUNCHENTOOT:REQUEST {1004348501}>)
+9: ((SB-PCL::FAST-METHOD HUNCHENTOOT:PROCESS-REQUEST (T))
+    #<unavailable argument>
+    #<unavailable argument>
+    #<HUNCHENTOOT:REQUEST {1004348501}>)
+10: ((SB-PCL::FAST-METHOD HUNCHENTOOT:PROCESS-CONNECTION
+      (HUNCHENTOOT:ACCEPTOR T))
+     #<unavailable argument>
+     #<unavailable argument>
+     #<HUNCHENTOOT:ACCEPTOR (host *, port 8888)>
+     #<USOCKET:STREAM-USOCKET {100355C191}>)
+11: ((SB-PCL::FAST-METHOD HUNCHENTOOT:PROCESS-CONNECTION :AROUND
+      (HUNCHENTOOT:ACCEPTOR T))
+     #<unavailable argument>
+     #S(SB-PCL::FAST-METHOD-CALL
+        :FUNCTION #<FUNCTION #>
+        :PV NIL
+        :NEXT-METHOD-CALL NIL
+        :ARG-INFO (2))
+     #<HUNCHENTOOT:ACCEPTOR (host *, port 8888)>
+     #<USOCKET:STREAM-USOCKET {100355C191}>)
+12: ((LAMBDA ()))
+13: ((FLET #:WITHOUT-INTERRUPTS-BODY-[BLOCK360]365))
+14: ((FLET SB-THREAD::WITH-MUTEX-THUNK))
+15: ((FLET #:WITHOUT-INTERRUPTS-BODY-[CALL-WITH-MUTEX]267))
+16: (SB-THREAD::CALL-WITH-MUTEX
+     #<CLOSURE (FLET SB-THREAD::WITH-MUTEX-THUNK) {7FFFF3618CA9}>
+     #S(SB-THREAD:MUTEX
+        :NAME "thread result lock"
+        :%OWNER #<SB-THREAD:THREAD "Hunchentoot worker (client: 127.0.0.1:43363)" RUNNING {1003563061}>
+        :STATE 1)
+     #<SB-THREAD:THREAD "Hunchentoot worker (client: 127.0.0.1:43363)" RUNNING {1003563061}>
+     T)
+17: ((LAMBDA ()))
+18: ("foreign function: #x421700")
+19: ("foreign function: #x4183E7")
+
+[2010-09-10 21:10:46 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1002ED8581}>.
+[2010-09-10 21:11:37 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10042F56D1}>.
+[2010-09-10 21:12:03 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10041FEB31}>.
+[2010-09-10 21:18:10 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004EC8C01}>.
+[2010-09-10 21:18:33 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004C96791}>.
+[2010-09-10 21:20:10 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004B8B3E1}>.
+[2010-09-10 21:20:38 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100448F831}>.
+[2010-09-10 21:21:26 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10041C5731}>.
+[2010-09-10 21:22:41 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10054FC651}>.
+[2010-09-10 21:23:42 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10053CBBD1}>.
+[2010-09-10 21:24:36 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100422D0A1}>.
+[2010-09-10 21:24:57 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1004D18B01}>.
+[2010-09-10 21:26:15 [INFO]] Default handler called for script /favicon.ico
+[2010-09-10 21:26:18 [INFO]] Default handler called for script /favicon.ico
+[2010-09-10 21:26:44 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1005112AF1}>.
+[2010-09-10 21:27:59 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10044F58D1}>.
+[2010-09-10 21:28:38 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003719E31}>.
+[2010-09-10 21:29:58 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003EF6EA1}>.
+[2010-09-10 21:31:22 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003723001}>.
+[2010-09-10 21:32:09 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10038F4E61}>.
+[2010-09-10 21:34:19 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100406D881}>.
+[2010-09-10 21:35:07 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100449D821}>.
+[2010-09-10 21:35:47 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100452F021}>.
+[2010-09-10 23:10:10 [INFO]] Session with ID 2 too old
+[2010-09-10 23:10:10 [INFO]] No session for session identifier '2:6A8E622F7B09C8795546D19401900EE3' (User-Agent: 'Mozilla/5.0 (X11; U; Linux x86_64; ja; rv:1.9.2.9) Gecko/20100825 Ubuntu/10.04 (lucid) Firefox/3.6.9', IP: '218.44.180.108')
+[2010-09-10 23:10:30 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100463C931}>.
+[2010-09-11 10:31:04 [INFO]] Session with ID 3 too old
+[2010-09-11 10:31:04 [INFO]] No session for session identifier '3:EC0AA184585FE659B9D28B3394F0D07E' (User-Agent: 'Mozilla/5.0 (X11; U; Linux x86_64; ja; rv:1.9.2.9) Gecko/20100825 Ubuntu/10.04 (lucid) Firefox/3.6.9', IP: '218.44.180.108')
+[2010-09-11 10:31:27 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1002F310A1}>.
+[2010-09-11 10:32:14 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100362FB91}>.
+[2010-09-11 10:34:12 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003B23C61}>.
+[2010-09-11 10:34:42 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100523CC71}>.
+[2010-09-11 10:35:11 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10040CD901}>.
+[2010-09-11 10:38:14 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1006616901}>.
+[2010-09-11 10:39:01 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1003A7B0F1}>.
+[2010-09-11 10:53:56 [INFO]] Default handler called for script /favicon.ico
+[2010-09-11 10:54:16 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {10066FE1B1}>.
+[2010-09-11 10:54:16 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100672CEF1}>.
+[2010-09-11 10:54:27 [INFO]] Default handler called for script /favicon.ico
+[2010-09-11 10:54:47 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {1006798D81}>.
+[2010-09-11 10:54:47 [ERROR]] Error while processing connection: I/O timeout reading #<SB-SYS:FD-STREAM for "a socket" {100680C561}>.
