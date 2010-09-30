@@ -3,7 +3,6 @@
 ;;;
 
 
-
 (defun print-cstruct (cstruct type)
   (loop for i in (foreign-slot-names type)
      do (let ((v (foreign-slot-value cstruct type i)))
@@ -16,10 +15,6 @@
   (loop for i from 0 to count
      collect (mem-ref (inc-pointer (make-pointer adress) i) :char)))
 
-
-
-
-
 ;;; DUMP MEMORY:
 ;;; (loop for i from 0 to 20
 ;;;    collect (mem-ref (inc-pointer (slot-value *kou* 'sub_codes) i) :char))
@@ -27,7 +22,7 @@
 ;;;             collect (mem-ref (inc-pointer (make-pointer #X7FFFEC02E880) i) :char))
 
 
-
+;;;;  前のeblibの実装　　
 ;; (defun check-book-type (path)
 ;;   (with-foreign-pointer (book (foreign-type-size 'EB_Book_Struct))
 ;;     (eb_initialize_book  book)
