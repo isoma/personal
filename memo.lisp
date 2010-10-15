@@ -3,6 +3,22 @@
 ;;;
 
 
+(directory "/")
+
+
+
+
+(let ((dir "/home/soma/dic/IWANAMI_K4/"))
+  (directory (make-pathname :directory dir :name :wild))
+
+(let ((dir "/home/soma/dic/IWANAMI_K4/"))
+  (make-pathname :directory dir :name "CATALOGS"))
+
+(let ((dir "/home/soma/dic/IWANAMI_K4/"))
+  (make-pathname :directory dir :name "CATALOGS"))
+
+(
+
 (defun print-cstruct (cstruct type)
   (loop for i in (foreign-slot-names type)
      do (let ((v (foreign-slot-value cstruct type i)))
