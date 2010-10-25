@@ -17,7 +17,42 @@
 (let ((dir "/home/soma/dic/IWANAMI_K4/"))
   (make-pathname :directory dir :name "CATALOGS"))
 
-(
+
+(let* ((dir "/home/soma/dic/IWANAMI_K4/")
+       (file (make-pathname :directory dir :name "CATALOGS")))
+  (if (probe-file file)
+      (format t "File exist ~S." file)
+      (format t "File dose not exist ~S." file)))
+
+
+;;;------------------------------------------------------
+
+(defun as-keyword (sym)
+  (intern (string sym) :keyword))
+
+(defun slot->defclass-slot (spec)
+  (let ((name (first spec)))
+    `(,name :initarg ,(as-keyword name) :accessor  ,name)))
+
+(defmacro define-binary-class (name slots)
+  `(defclass ,name ()
+     ,(mapcar #'slot->defclass-slot slots)))
+
+
+(define-binary-class id3-tag
+    ((file-identifier (iso-8859-1-string :length 3))
+     (major-version ui)
+     (version ui)
+     (flags ui)
+     (size id3-tag-size)
+     (frames (id3-frames :tag-size size))))
+
+
+(as-keyword 'ul)
+(slot->defclass-slot '(major-version ul))
+
+;;;------------------------------------------------------
+
 
 (defun print-cstruct (cstruct type)
   (loop for i in (foreign-slot-names type)
