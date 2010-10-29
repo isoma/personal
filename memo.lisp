@@ -1,11 +1,15 @@
 ;;;
 ;;; アイデアとかプロトタイプを貯めておくところ
 ;;;
+;;;------------------------------------------------------
+(lisp-implementation-version )
 
+;;;------------------------------------------------------
+
+(list-all-packages)
+INET-SOCKET
 
 (directory "/")
-
-
 
 
 (let ((dir "/home/soma/dic/IWANAMI_K4/"))
@@ -24,6 +28,13 @@
       (format t "File exist ~S." file)
       (format t "File dose not exist ~S." file)))
 
+
+;;;------------------------------------------------------
+(get-decoded-time)
+(get-universal-time)
+
+(decode-universal-time (get-universal-time))
+(get-internal-real-time)
 
 ;;;------------------------------------------------------
 
